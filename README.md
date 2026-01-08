@@ -1,6 +1,6 @@
 = finishing-bot: Release Readiness Validator
-:toc: macro
-:toc-title:
+:toc:
+:toc-title: Contents
 :toclevels: 3
 :icons: font
 :source-highlighter: pygments
@@ -9,98 +9,102 @@
 toc::[]
 
 == Overview
-`finishing-bot` is a **release readiness validation bot** in the https://gitlab.com/hyperpolymath[Hyperpolymath] ecosystem. It ensures repositories are **production-ready** by:
-- Removing placeholders (e.g., `TODO`, `FIXME`)
-- Validating licenses and compliance
-- Verifying claims (e.g., documentation accuracy, test coverage)
-- Enforcing **reversibility** and **extensibility** in release artifacts
+`finishing-bot` is a **release readiness validation bot** in the https://gitlab.com/hyperpolymath[Hyperpolymath] ecosystem.
+It ensures repositories are **production-ready** by:
 
-`finishing-bot` is part of the https://gitlab.com/hyperpolymath/gitbot-fleet[Gitbot Fleet] and integrates with `repo-care` for **package manager interface** support.
+- Removing placeholders (e.g., `TODO`, `FIXME`).
+- Validating licenses and compliance.
+- Verifying claims (e.g., documentation accuracy, test coverage).
+- Enforcing **reversibility** and **extensibility** in release artifacts.
+
+Part of the https://gitlab.com/hyperpolymath/gitbot-fleet[Gitbot Fleet], it integrates with `repo-care` for **package manager interface support**.
 
 === Key Features
-- **Placeholder Removal**: Automatically detects and removes or flags placeholders.
-- **License Validation**: Ensures all dependencies and project files comply with specified licenses (AGPL-3.0-or-later, MIT, Palimpsest v0.4).
-- **Claim Verification**: Cross-checks documentation, tests, and metadata for accuracy.
-- **Automated Fixes**: Applies corrections via CI/CD pipelines.
-- **Integration**: Works alongside `glambot` (presentation) and `rhodibot` (structural compliance).
-┌──────────────────────────────────────────┐
-│                                      │
-│  ┌─────────┐     ┌─────────┐     ┌─────────┐  │
-│  │ rhodibot│     │ echidna │     │  oikos  │  │
-│  │ (RSR    │     │ (verify)│     │ (eco/   │  │
-│  │  struct)│     │         │     │  econ)  │  │
-│  └────┬────┘     └────┬────┘     └────┬────┘  │
-│       │              │              │       │
-│       ▼              ▼              ▼       │
-│  ┌─────────────────────────────────────┐   │
-│  │           SHARED CONTEXT LAYER      │   │
-│  └─────────────────────────────────────┘   │
-│       │              │              │       │
-│       ▼              ▼              ▼       │
-│  ┌─────────┐     ┌─────────┐     ┌─────────┐  │
-│  │ glambot │     │ seambot │     │finishing│  │
-│  │(present-│     │(integr- │     │ -bot    │  │
-│  │ ation)  │     │ ation)  │     │(release)│  │
-│  └─────────┘     └─────────┘     └─────────┘  │
-│                                      │
-└──────────────────────────────────────────┘
+- **Placeholder Removal**: Auto-detects/removes or flags placeholders.
+- **License Validation**: Ensures compliance with `AGPL-3.0-or-later`, `MIT`, or `Palimpsest v0.4`.
+- **Claim Verification**: Cross-checks docs, tests, and metadata.
+- **Automated Fixes**: Applies corrections via CI/CD.
+- **Integration**: Works with `glambot` (presentation) and `rhodibot` (structural compliance).
 
+---
+[subs="verbatim,quotes"]
+....
+          ┌──────────────────────────────────────────┐
+          │                                      │
+          │  ┌─────────┐     ┌─────────┐     ┌─────────┐  │
+          │  │ rhodibot│     │ echidna │     │  oikos  │  │
+          │  │ (RSR    │     │ (verify)│     │ (eco/   │  │
+          │  │  struct)│     │         │     │  econ)  │  │
+          │  └────┬────┘     └────┬────┘     └────┬────┘  │
+          │       │              │              │       │
+          │       ▼              ▼              ▼       │
+          │  ┌─────────────────────────────────────┐   │
+          │  │        SHARED CONTEXT LAYER         │   │
+          │  └─────────────────────────────────────┘   │
+          │       │              │              │       │
+          │       ▼              ▼              ▼       │
+          │  ┌─────────┐     ┌─────────┐     ┌─────────┐  │
+          │  │ glambot │     │ seambot │     │finishing│  │
+          │  │(present-│     │(integr- │     │ -bot    │  │
+          │  │ ation)  │     │ ation)  │     │(release)│  │
+          │  └─────────┘     └─────────┘     └─────────┘  │
+          │                                      │
+          └──────────────────────────────────────────┘
+....
 
 == Use Cases
-- **Pre-Release Audits**: Validates repositories before tagging/releases.
-- **CI/CD Integration**: Runs as a pipeline step to block releases with unresolved issues.
-- **Educational Use**: Helps students/teachers ensure project completeness and compliance.
-- **Reversibility**: Logs all changes for rollback or review.
+- **Pre-Release Audits**: Validates repos before tagging/releases.
+- **CI/CD Integration**: Blocks releases with unresolved issues.
+- **Educational Use**: Helps students/teachers ensure project completeness.
+- **Reversibility**: Logs all changes for rollback/review.
 
 == Installation
-`finishing-bot` is designed for **GitLab CI/CD** and local use:
+For **GitLab CI/CD** or local use:
 
-1. **Add to your repository**:
-   [source,bash]
-   -----
-   git submodule add https://gitlab.com/hyperpolymath/finishing-bot.git .finishing-bot
-   -----
+[source,bash]
+----
+git submodule add https://gitlab.com/hyperpolymath/finishing-bot.git .finishing-bot
+----
 
-2. **Configure**:
-   - Add a `.finishing-bot/config.yml` file:
-     [source,yaml]
-     -----
-     licenses:
-       allowed: [AGPL-3.0-or-later, MIT, Palimpsest-v0.4]
-       strict: true
-     placeholders:
-       patterns: [TODO, FIXME, XXX]
-       action: remove  # or "flag"
-     claims:
-       verify_docs: true
-       verify_tests: true
-     -----
+=== Configuration
+Add `.finishing-bot/config.yml`:
+[source,yaml]
+----
+licenses:
+  allowed: [AGPL-3.0-or-later, MIT, Palimpsest-v0.4]
+  strict: true
+placeholders:
+  patterns: [TODO, FIXME, XXX]
+  action: remove  # or "flag"
+claims:
+  verify_docs: true
+  verify_tests: true
+----
 
-3. **Automate with Just**:
-   Include tasks in your `justfile`:
-   [source]
-   -----
-   finishing-audit:
-     @cd .finishing-bot && just audit
+=== Automation with Just
+Include in your `justfile`:
+[source]
+----
+finishing-audit:
+  @cd .finishing-bot && just audit
 
-   finishing-fix:
-     @cd .finishing-bot && just fix
-   -----
+finishing-fix:
+  @cd .finishing-bot && just fix
+----
 
 == Usage
-Run `finishing-bot` manually or in CI/CD:
-
+Run manually or in CI/CD:
 [source,bash]
 ----
 # Audit repository
 just finishing-audit
 
-# Apply automated fixes
+# Apply fixes
 just finishing-fix
 ----
 
 == Configuration
-Customize behavior via `.finishing-bot/config.yml`. See link:CONFIGURATION.adoc[Configuration Guide] for details.
+Customize via `.finishing-bot/config.yml`. See link:CONFIGURATION.adoc[Configuration Guide].
 
 == Documentation
 - link:ROADMAP.adoc[Project Roadmap]
@@ -108,17 +112,12 @@ Customize behavior via `.finishing-bot/config.yml`. See link:CONFIGURATION.adoc[
 - link:API.adoc[API Reference]
 - link:licences/[Licenses]
 
-== Integration with repo-care
-`finishing-bot` supports the **package manager interface** project (`repo-care`):
+== Integration with `repo-care`
 - Validates **Rhodium Standard Repositories (RSR)** compliance.
 - Ensures **SHA256/SHA-512** integrity for release artifacts.
 - Logs actions to the **knowledge graph** for traceability.
 
-== Automation
-All tasks are managed via `just`. Run `just --list` for available commands.
-
 == License
-This project is licensed under:
 - link:licences/AGPL-3.0-or-later.txt[AGPL-3.0-or-later]
 - link:licences/MIT.txt[MIT]
 - link:licences/Palimpsest-v0.4.txt[Palimpsest v0.4]
@@ -126,10 +125,11 @@ This project is licensed under:
 == Community
 - link:CODE_OF_CONDUCT.adoc[Code of Conduct]
 - link:GOVERNANCE.adoc[Governance]
-- link:FUNDING.adoc[Funding & Sponsorship]
+- link:FUNDING.adoc[Funding]
 
 == Relationship to Gitbot Fleet
-`finishing-bot` is one of several bots in the https://gitlab.com/hyperpolymath/gitbot-fleet[Gitbot Fleet]. For broader repository health, combine with:
+`finishing-bot` is part of the https://gitlab.com/hyperpolymath/gitbot-fleet[Gitbot Fleet].
+Combine with:
 - `rhodibot` (structural compliance)
 - `glambot` (presentation quality)
 - `echidnabot` (mathematical verification)
@@ -137,7 +137,7 @@ This project is licensed under:
 - `seambot` (integration health)
 
 == Security
-Security vulnerabilities should be reported via:
-- **GitLab Issues** (private) or
+Report vulnerabilities via:
+- GitLab Issues (private) or
 - Email: `security@hyperpolymath.org` (PGP encrypted).
-See link:SECURITY.adoc[Security Policy] for details.
+See link:SECURITY.adoc[Security Policy].

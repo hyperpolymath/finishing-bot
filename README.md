@@ -23,9 +23,6 @@ toc::[]
 - **Claim Verification**: Cross-checks documentation, tests, and metadata for accuracy.
 - **Automated Fixes**: Applies corrections via CI/CD pipelines.
 - **Integration**: Works alongside `glambot` (presentation) and `rhodibot` (structural compliance).
-
-== Architecture
-`finishing-bot` operates as a standalone bot within the Gitbot Fleet:
 ┌──────────────────────────────────────────┐
 │                                      │
 │  ┌─────────┐     ┌─────────┐     ┌─────────┐  │
@@ -48,8 +45,6 @@ toc::[]
 │                                      │
 └──────────────────────────────────────────┘
 
-
-`finishing-bot` is a **satellite** of `git-dispatcher`, the central coordination hub for Git automation in the Hyperpolymath ecosystem.
 
 == Use Cases
 - **Pre-Release Audits**: Validates repositories before tagging/releases.

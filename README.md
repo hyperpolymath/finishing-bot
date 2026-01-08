@@ -26,32 +26,28 @@ toc::[]
 
 == Architecture
 `finishing-bot` operates as a standalone bot within the Gitbot Fleet:
+┌──────────────────────────────────────────┐
+│                                      │
+│  ┌─────────┐     ┌─────────┐     ┌─────────┐  │
+│  │ rhodibot│     │ echidna │     │  oikos  │  │
+│  │ (RSR    │     │ (verify)│     │ (eco/   │  │
+│  │  struct)│     │         │     │  econ)  │  │
+│  └────┬────┘     └────┬────┘     └────┬────┘  │
+│       │              │              │       │
+│       ▼              ▼              ▼       │
+│  ┌─────────────────────────────────────┐   │
+│  │           SHARED CONTEXT LAYER      │   │
+│  └─────────────────────────────────────┘   │
+│       │              │              │       │
+│       ▼              ▼              ▼       │
+│  ┌─────────┐     ┌─────────┐     ┌─────────┐  │
+│  │ glambot │     │ seambot │     │finishing│  │
+│  │(present-│     │(integr- │     │ -bot    │  │
+│  │ ation)  │     │ ation)  │     │(release)│  │
+│  └─────────┘     └─────────┘     └─────────┘  │
+│                                      │
+└──────────────────────────────────────────┘
 
-[source]
-----
-                     GITBOT FLEET
-   ┌──────────────────────────────────────────┐
-   │                                          │
-   │  ┌─────────┐  ┌─────────┐  ┌─────────┐  │
-   │  │ rhodibot│  │echidna  │  │  oikos  │  │
-   │  │(RSR     │  │(verify) │  │(eco/    │  │
-   │  │ struct) │  │         │  │ econ)   │  │
-   │  └────┬────┘  └────┬────┘  └────┬────┘  │
-   │       │            │            │        │
-   │       ▼            ▼            ▼        │
-   │  ┌─────────────────────────────────────┐ │
-   │  │        SHARED CONTEXT LAYER         │ │
-   │  └─────────────────────────────────────┘ │
-   │       │            │            │        │
-   │       ▼            ▼            ▼        │
-   │  ┌─────────┐  ┌─────────┐  ┌─────────┐  │
-   │  │ glambot │  │ seambot │  │finishing│  │
-   │  │(present │  │(integr) │  │  -bot   │  │
-   │  │ ation)  │  │         │  │(release)│  │
-   │  └─────────┘  └─────────┘  └─────────┘  │
-   │                                          │
-   └──────────────────────────────────────────┘
-----
 
 `finishing-bot` is a **satellite** of `git-dispatcher`, the central coordination hub for Git automation in the Hyperpolymath ecosystem.
 

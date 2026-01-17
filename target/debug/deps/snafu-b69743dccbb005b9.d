@@ -1,0 +1,12 @@
+/var/home/hyper/repos/finishing-bot/target/debug/deps/snafu-b69743dccbb005b9.d: /home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/lib.rs /home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/backtrace_impl_std.rs /home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/once_bool.rs /home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/error_chain.rs /home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/report.rs /home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/boxed_impls.rs /home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/Snafu.md /home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/report.md
+
+/var/home/hyper/repos/finishing-bot/target/debug/deps/libsnafu-b69743dccbb005b9.rmeta: /home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/lib.rs /home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/backtrace_impl_std.rs /home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/once_bool.rs /home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/error_chain.rs /home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/report.rs /home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/boxed_impls.rs /home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/Snafu.md /home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/report.md
+
+/home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/lib.rs:
+/home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/backtrace_impl_std.rs:
+/home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/once_bool.rs:
+/home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/error_chain.rs:
+/home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/report.rs:
+/home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/boxed_impls.rs:
+/home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/Snafu.md:
+/home/hyper/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/snafu-0.8.9/src/report.md:
